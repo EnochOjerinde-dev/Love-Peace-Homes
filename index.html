@@ -1,0 +1,515 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Safe, peaceful independent living for women and women with children in Las Vegas. Affordable shared housing with structure and respect.">
+    <title>Love & Peace Homes LV | Independent Living for Women in Las Vegas</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --bg-color: #f5cecf;
+            --primary-dark: #b3606a;
+            --deep-accent: #522925;
+            --white: #ffffff;
+            --text-main: #333333;
+            --max-width: 1100px;
+            --transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            line-height: 1.7;
+            color: var(--text-main);
+            background-color: var(--bg-color);
+            -webkit-font-smoothing: antialiased;
+            overflow-x: hidden;
+        }
+
+        h1, h2, h3 {
+            font-family: 'Playfair Display', serif;
+            color: var(--deep-accent);
+            line-height: 1.2;
+            margin-bottom: 1.5rem;
+        }
+
+        /* Reveal Animation on Scroll */
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: var(--transition);
+        }
+
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Navigation */
+        nav {
+            background: var(--white);
+            padding: 1.2rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(82, 41, 37, 0.05);
+            transition: var(--transition);
+        }
+
+        .nav-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 1.5rem;
+            max-width: var(--max-width);
+            margin: 0 auto;
+        }
+
+        .logo {
+            font-family: 'Playfair Display', serif;
+            font-weight: 700;
+            font-size: 1.4rem;
+            color: var(--deep-accent);
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        .logo:hover {
+            color: var(--primary-dark);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2.5rem;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--deep-accent);
+            font-weight: 500;
+            font-size: 0.95rem;
+            position: relative;
+            transition: var(--transition);
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -5px;
+            left: 0;
+            background-color: var(--primary-dark);
+            transition: var(--transition);
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        /* Hero Section with Background sync */
+        .hero {
+            position: relative;
+            min-height: 80vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: var(--white);
+            overflow: hidden;
+            background-color: var(--deep-accent);
+        }
+
+        .hero-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: linear-gradient(rgba(82, 41, 37, 0.7), rgba(82, 41, 37, 0.5)), url('home-background.jpg');
+            background-size: cover;
+            background-position: center;
+            z-index: 1;
+            transition: transform 8s ease;
+        }
+
+        .hero:hover .hero-bg {
+            transform: scale(1.05);
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            padding: 2rem;
+            max-width: 900px;
+        }
+
+        .hero h1 {
+            color: var(--white);
+            font-size: clamp(2.2rem, 6vw, 4rem);
+            margin-bottom: 2rem;
+            text-shadow: 0 2px 10px rgba(0,0,0,0.2);
+        }
+
+        .hero p {
+            font-size: clamp(1.1rem, 2vw, 1.4rem);
+            margin-bottom: 3rem;
+            color: rgba(255,255,255,0.95);
+        }
+
+        /* Main Container */
+        .container {
+            max-width: var(--max-width);
+            margin: 0 auto;
+            padding: 0 1.5rem;
+        }
+
+        section {
+            padding: 7rem 0;
+        }
+
+        /* Card System */
+        .card {
+            background: var(--white);
+            padding: 3rem;
+            border-radius: 24px;
+            box-shadow: 0 10px 40px rgba(82, 41, 37, 0.04);
+            transition: var(--transition);
+            border: 1px solid rgba(179, 96, 106, 0.1);
+        }
+
+        .card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 50px rgba(82, 41, 37, 0.08);
+        }
+
+        /* Image Display Logic */
+        .image-slider-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.5rem;
+            margin: 3rem 0;
+        }
+
+        .room-frame {
+            border-radius: 16px;
+            overflow: hidden;
+            height: 350px;
+            background: #e0e0e0;
+            position: relative;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+            transition: var(--transition);
+        }
+
+        .room-frame img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: var(--transition);
+        }
+
+        .room-frame:hover img {
+            transform: scale(1.08);
+        }
+
+        .room-label {
+            position: absolute;
+            bottom: 20px;
+            left: 20px;
+            background: rgba(255,255,255,0.9);
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            color: var(--deep-accent);
+        }
+
+        /* Buttons */
+        .cta-button {
+            display: inline-block;
+            background-color: var(--primary-dark);
+            color: var(--white);
+            padding: 1.3rem 3rem;
+            border-radius: 12px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.1rem;
+            transition: var(--transition);
+            box-shadow: 0 8px 20px rgba(179, 96, 106, 0.25);
+        }
+
+        .cta-button:hover {
+            background-color: var(--deep-accent);
+            transform: translateY(-3px) scale(1.02);
+            box-shadow: 0 12px 30px rgba(82, 41, 37, 0.3);
+        }
+
+        /* List Styling */
+        ul li {
+            list-style: none;
+            position: relative;
+            padding-left: 2rem;
+            margin-bottom: 1rem;
+        }
+
+        ul li::before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            color: var(--primary-dark);
+            font-weight: bold;
+        }
+
+        /* FAQ */
+        details {
+            background: var(--white);
+            margin-bottom: 1rem;
+            border-radius: 16px;
+            transition: var(--transition);
+            border: 1px solid transparent;
+        }
+
+        summary {
+            padding: 1.8rem;
+            font-weight: 600;
+            cursor: pointer;
+            list-style: none;
+            display: flex;
+            justify-content: space-between;
+            color: var(--deep-accent);
+        }
+
+        summary::after {
+            content: '→';
+            transition: var(--transition);
+        }
+
+        details[open] summary::after {
+            transform: rotate(90deg);
+        }
+
+        details[open] {
+            border-color: var(--primary-dark);
+        }
+
+        /* Footer */
+        footer {
+            background: var(--deep-accent);
+            color: var(--white);
+            padding: 5rem 0;
+            text-align: center;
+        }
+
+        @media (max-width: 768px) {
+            .image-slider-container {
+                grid-template-columns: 1fr;
+            }
+            .room-frame {
+                height: 250px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <nav aria-label="Main Navigation">
+        <div class="nav-content">
+            <a href="#" class="logo">Love & Peace Homes LV</a>
+            <div class="nav-links">
+                <a href="#about">About</a>
+                <a href="#services">Living</a>
+                <a href="#eligibility">Eligibility</a>
+                <a href="#faq">FAQ</a>
+            </div>
+        </div>
+    </nav>
+
+    <main>
+        <!-- HERO SECTION -->
+        <header class="hero">
+            <div class="hero-bg"></div>
+            <div class="hero-content">
+                <h1>Safe, Peaceful Independent Living for Women in Las Vegas</h1>
+                <p>Providing structured, substance-free shared housing for women rebuilding independence and seeking a stable, respectful community.</p>
+                <a href="tel:9253938437" class="cta-button">Call Today to Schedule a Tour</a>
+                <div style="margin-top: 2rem; font-style: italic; opacity: 0.9;">Tours and brief screenings are required.</div>
+            </div>
+        </header>
+
+        <!-- INTRO SECTION -->
+        <section id="intro" class="reveal">
+            <div class="container">
+                <div style="max-width: 800px; margin: 0 auto; text-align: center;">
+                    <p style="font-size: 1.3rem; color: var(--deep-accent); font-weight: 500;">A home that creates the foundation for a better future.</p>
+                    <p>Love & Peace Homes LV is an independent living community in Las Vegas, NV, offering fully furnished, utility-inclusive housing for women and mothers ready for dignity, structure, and accountability.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- AMENITIES & IMAGES -->
+        <section id="services" style="background: var(--white); border-radius: 60px 60px 0 0;" class="reveal">
+            <div class="container">
+                <h2 style="text-align: center;">Comfortable, Fully Furnished Living</h2>
+                
+                <!-- Room Images Slots -->
+                <div class="image-slider-container">
+                    <div class="room-frame">
+                        <img src="home1.jpg" alt="Comfortable shared living space" onerror="this.parentElement.style.display='none'">
+                        <div class="room-label">Shared Living Areas</div>
+                    </div>
+                    <div class="room-frame">
+                        <img src="home2.jpg" alt="Fully furnished bedroom" onerror="this.parentElement.style.display='none'">
+                        <div class="room-label">Private/Shared Bedrooms</div>
+                    </div>
+                </div>
+
+                <div class="card" style="max-width: 700px; margin: 0 auto;">
+                    <ul style="margin-bottom: 2rem; display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
+                        <li>Furnished bedrooms</li>
+                        <li>Utilities included</li>
+                        <li>Wi-Fi included</li>
+                        <li>On-site Laundry</li>
+                        <li>Shared spaces</li>
+                        <li>Month-to-month</li>
+                        <li>Substance-free</li>
+                    </ul>
+                    <div style="text-align: center; border-top: 1px solid #f0f0f0; padding-top: 2rem;">
+                        <div style="font-size: 1.5rem; font-weight: 700; color: var(--primary-dark);">Beds starting at $800</div>
+                        <p style="font-size: 0.9rem; opacity: 0.7;">Availability varies by month.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ELIGIBILITY -->
+        <section id="eligibility" class="reveal">
+            <div class="container">
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 4rem; align-items: center;">
+                    <div>
+                        <h2>Is This Right for You?</h2>
+                        <p>We provide safe shared housing for women in Las Vegas who value structure, mutual respect, and a calm environment.</p>
+                        <ul>
+                            <li>Searching for safe housing for women with children</li>
+                            <li>Able to provide income verification</li>
+                            <li>Willing to follow community house rules</li>
+                            <li>Seeking a long-term stable environment</li>
+                        </ul>
+                    </div>
+                    <div class="card" style="background: var(--deep-accent); color: var(--white);">
+                        <h3 style="color: var(--white);">Mandatory Requirements</h3>
+                        <p>To maintain our standard of peace and safety, all applicants must complete:</p>
+                        <ul style="color: rgba(255,255,255,0.9);">
+                            <li>Initial phone screening</li>
+                            <li>Mandatory income verification</li>
+                            <li>In-person property tour</li>
+                        </ul>
+                        <p style="font-size: 0.9rem; margin-top: 1rem; opacity: 0.8;">Note: This is not an emergency shelter facility.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- FAQ ACCORDION -->
+        <section id="faq" class="reveal">
+            <div class="container" style="max-width: 800px;">
+                <h2 style="text-align: center;">Questions & Answers</h2>
+                
+                <details>
+                    <summary>What is independent living?</summary>
+                    <div style="padding: 1rem 1.8rem 2rem;">
+                        A shared housing model where residents live together in a residential home, sharing common areas while maintaining personal responsibility for their growth and stability.
+                    </div>
+                </details>
+
+                <details>
+                    <summary>Can I live here with my children?</summary>
+                    <div style="padding: 1rem 1.8rem 2rem;">
+                        Yes. We have dedicated options for women and women with children, focused on a safe, child-friendly atmosphere.
+                    </div>
+                </details>
+
+                <details>
+                    <summary>Is there a requirement for sobriety?</summary>
+                    <div style="padding: 1rem 1.8rem 2rem;">
+                        Yes. We maintain a strict substance-free environment to ensure the total safety and peace of all residents.
+                    </div>
+                </details>
+            </div>
+        </section>
+
+        <!-- FINAL CALL -->
+        <section style="background: var(--white); text-align: center;" class="reveal">
+            <div class="container">
+                <h2>Take the First Step</h2>
+                <p style="margin-bottom: 3rem;">A safe home is the foundation for everything else in life.</p>
+                <a href="tel:9253938437" class="cta-button">📞 Call 925-393-8437 Today</a>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <h3 style="color: var(--white); margin-bottom: 0.5rem;">Love & Peace Homes LV</h3>
+            <p>Las Vegas, Nevada</p>
+            <div style="margin-top: 2rem; font-size: 0.9rem; opacity: 0.6;">
+                &copy; 2024 Love & Peace Homes LV • Independent Living Excellence
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Intersection Observer for Reveal Animations
+        const observerOptions = {
+            threshold: 0.1
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+        // Smooth Navbar Shrink
+        window.addEventListener('scroll', () => {
+            const nav = document.querySelector('nav');
+            if (window.scrollY > 80) {
+                nav.style.padding = "0.8rem 0";
+                nav.style.background = "rgba(255, 255, 255, 0.98)";
+            } else {
+                nav.style.padding = "1.2rem 0";
+                nav.style.background = "#ffffff";
+            }
+        });
+
+        // FAQ Auto-close behavior
+        const details = document.querySelectorAll('details');
+        details.forEach((targetDetail) => {
+            targetDetail.addEventListener('click', () => {
+                details.forEach((detail) => {
+                    if (detail !== targetDetail) {
+                        detail.removeAttribute('open');
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>
